@@ -107,14 +107,14 @@ public class QuestionPresenter implements QuestionContract.Presenter {
   private void passStateToCheatScreen(QuestionToCheatState state) {
 
     //TODO: falta implementacion
-
+    mediator.setQuestionToCheatState(state);
   }
 
   private CheatToQuestionState getStateFromCheatScreen() {
 
     //TODO: falta implementacion
 
-    return null;
+    return mediator.getCheatToQuestionState();
   }
 
   private void disableNextButton() {

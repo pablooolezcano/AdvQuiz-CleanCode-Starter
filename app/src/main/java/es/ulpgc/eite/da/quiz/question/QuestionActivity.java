@@ -16,6 +16,7 @@ public class QuestionActivity
   public static String TAG = QuestionActivity.class.getSimpleName();
 
   private QuestionContract.Presenter presenter;
+  private TextView replyText;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
