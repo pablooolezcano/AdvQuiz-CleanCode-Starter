@@ -109,6 +109,8 @@ public class QuestionActivity
 
   public void onCheatButtonClicked(View view) {
     presenter.onCheatButtonClicked();
+    navigateToCheatScreen();
+
   }
 
   public void onOptionButtonClicked(View view) {

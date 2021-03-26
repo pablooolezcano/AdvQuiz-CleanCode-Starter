@@ -131,6 +131,9 @@ public class QuestionPresenter implements QuestionContract.Presenter {
       state.nextEnabled=true;
     }
   }
+  private void navigateToCheatScreen(){
+    view.get().navigateToCheatScreen();
+  }
 
   @Override
   public void injectView(WeakReference<QuestionContract.View> view) {
