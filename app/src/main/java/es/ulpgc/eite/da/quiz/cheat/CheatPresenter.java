@@ -1,5 +1,6 @@
 package es.ulpgc.eite.da.quiz.cheat;
 
+import android.telephony.SmsMessage;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
@@ -87,7 +88,17 @@ public class CheatPresenter implements CheatContract.Presenter {
 
     //TODO: falta implementacion
     //option=1 => yes, option=0 => no
+    if(option == 1){
+      state.answerCheated = true;
+      view.get().updateAnswer();
+      state.yesButton = false;
+      state.noButton = false;
 
+    } else{
+      state.answerCheated = false;
+      CheatToQuestionState newState = new CheatToQuestionState(state.answerCheated);
+      view.get().onFinish();
+    }
   }
 
   private void passStateToQuestionScreen(CheatToQuestionState state) {

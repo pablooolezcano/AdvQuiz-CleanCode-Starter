@@ -95,6 +95,7 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     Log.e(TAG, "onNextButtonClicked()");
 
     //TODO: falta implementacion
+
   }
 
   @Override
@@ -102,6 +103,7 @@ public class QuestionPresenter implements QuestionContract.Presenter {
     Log.e(TAG, "onCheatButtonClicked()");
 
     //TODO: falta implementacion
+    view.get().navigateToCheatScreen();
   }
 
   private void passStateToCheatScreen(QuestionToCheatState state) {

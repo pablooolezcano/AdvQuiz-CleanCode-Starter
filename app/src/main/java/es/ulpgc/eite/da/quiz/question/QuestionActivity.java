@@ -104,12 +104,12 @@ public class QuestionActivity
 
 
   public void onNextButtonClicked(View view) {
+
     presenter.onNextButtonClicked();
   }
 
   public void onCheatButtonClicked(View view) {
     presenter.onCheatButtonClicked();
-    navigateToCheatScreen();
 
   }
 
