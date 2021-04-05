@@ -2,9 +2,11 @@ package es.ulpgc.eite.da.quiz.cheat;
 
 import android.telephony.SmsMessage;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.da.quiz.R;
 import es.ulpgc.eite.da.quiz.app.AppMediator;
 import es.ulpgc.eite.da.quiz.app.CheatToQuestionState;
 import es.ulpgc.eite.da.quiz.app.QuestionToCheatState;
@@ -46,6 +48,12 @@ public class CheatPresenter implements CheatContract.Presenter {
     Log.e(TAG, "onRestart()");
 
     //TODO: falta implementacion
+    if(state.answerCheated){
+      state.yesButton = false;
+      state.noButton = false;
+      state.answer = "América del Sur";
+    }
+    view.get().displayAnswer(state);
   }
 
   @Override
@@ -60,11 +68,19 @@ public class CheatPresenter implements CheatContract.Presenter {
 
       // fetch the model
 
+      model.setAnswer(savedState.answer);
+      state.answer = "???";
+      //view.get().resetAnswer();
+
       // update the state
 
     }
 
     // update the view
+    if(!state.answerCheated) {
+      state.yesButton = true;
+      state.noButton = true;
+    }
     view.get().displayAnswer(state);
 
   }
@@ -79,37 +95,42 @@ public class CheatPresenter implements CheatContract.Presenter {
     Log.e(TAG, "onBackPressed()");
 
     //TODO: falta implementacion
-
+  CheatToQuestionState newState = new CheatToQuestionState(state.answerCheated);
+  passStateToQuestionScreen(newState);
+  view.get().onFinish();
   }
 
   @Override
   public void onWarningButtonClicked(int option) {
     Log.e(TAG, "onWarningButtonClicked()");
-
     //TODO: falta implementacion
     //option=1 => yes, option=0 => no
-    if(option == 1){
-      state.answerCheated = true;
-      view.get().updateAnswer();
-      state.yesButton = false;
-      state.noButton = false;
 
-    } else{
-      state.answerCheated = false;
-      CheatToQuestionState newState = new CheatToQuestionState(state.answerCheated);
-      view.get().onFinish();
-    }
+    //Log.e(TAG, savedState.answer);
+      if (option == 1) {
+        state.answerCheated = true;
+        state.yesButton = false;
+        state.noButton = false;
+        state.answer = model.getAnswer();
+        //state.answerEnabled = false;
+        view.get().displayAnswer(state);
+      } else {
+        //state.answerCheated = false;
+        //CheatToQuestionState newState = new CheatToQuestionState(state.answerCheated);
+        view.get().onFinish();
+      }
+
   }
 
   private void passStateToQuestionScreen(CheatToQuestionState state) {
 
-    //TODO: falta implementacion
+
     mediator.setCheatToQuestionState(state);
   }
 
   private QuestionToCheatState getStateFromQuestionScreen() {
 
-    //TODO: falta implementacion
+
 
     return mediator.getQuestionToCheatState();
   }

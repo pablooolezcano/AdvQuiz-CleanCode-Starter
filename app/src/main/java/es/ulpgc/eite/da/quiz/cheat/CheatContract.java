@@ -10,7 +10,6 @@ public interface CheatContract {
     void displayAnswer(CheatViewModel viewModel);
     void resetAnswer();
     void onFinish();
-    void updateAnswer();
   }
 
   interface Presenter {

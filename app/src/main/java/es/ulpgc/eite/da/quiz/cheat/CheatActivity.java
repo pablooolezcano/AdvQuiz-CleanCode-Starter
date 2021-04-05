@@ -1,6 +1,7 @@
 package es.ulpgc.eite.da.quiz.cheat;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ public class CheatActivity
   private CheatContract.Presenter presenter;
 
   Button yesButton, noButton;
-  TextView warningText;
+  TextView warningText, answerText;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class CheatActivity
     yesButton = findViewById(R.id.yesButton);
     noButton = findViewById(R.id.noButton);
     warningText = findViewById(R.id.warningTextView);
+    answerText = findViewById(R.id.answerTextView);
     //
     yesButton.setText(R.string.yes_button);
     noButton.setText(R.string.no_button);
@@ -74,12 +76,12 @@ public class CheatActivity
 
   @Override
   public void displayAnswer(CheatViewModel viewModel) {
-    //Log.e(TAG, "displayAnswer()");
+    //Log.e(TAG, viewModel.answer);
 
     // deal with the answer
-    ((TextView) findViewById(R.id.answerTextView)).setText(viewModel.answer);
-    findViewById(R.id.noButton).setEnabled(viewModel.answerEnabled);
-    findViewById(R.id.yesButton).setEnabled(viewModel.answerEnabled);
+    answerText.setText(viewModel.answer);
+    noButton.setEnabled(viewModel.noButton);
+    yesButton.setEnabled(viewModel.yesButton);
   }
 
   @Override
@@ -87,12 +89,7 @@ public class CheatActivity
     ((TextView) findViewById(R.id.answerTextView))
         .setText(R.string.empty_answer);
   }
-  // este metodo es de prueba, esta mostrando un string que no es
-  @Override
-  public void updateAnswer(){
-    ((TextView) findViewById(R.id.answerTextView))
-            .setText(R.string.correct_reply);
-  }
+
 
 
   public void onWarningButtonClicked(View view) {
