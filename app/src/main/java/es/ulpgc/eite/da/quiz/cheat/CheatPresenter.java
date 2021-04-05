@@ -51,7 +51,7 @@ public class CheatPresenter implements CheatContract.Presenter {
     if(state.answerCheated){
       state.yesButton = false;
       state.noButton = false;
-      state.answer = "América del Sur";
+
     }
     view.get().displayAnswer(state);
   }
